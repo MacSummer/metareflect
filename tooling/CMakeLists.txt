@@ -1,3 +1,6 @@
+cmake_minimum_required(VERSION 3.15)
+project(MetaReflect)
+
 set(LLVM_LINK_COMPONENTS Support)
 
 set(LLVM_LIB_DIR "D:/Program Files/LLVM/lib")
@@ -16,21 +19,73 @@ link_directories(
     ${LLVM_LIB_DIR}
 )
 
+file(GLOB_RECURSE SOURCES "./*.cpp" "./*.h")
 
-add_executable(metareflect
-    reflect.cpp
-    reflectedclass.cpp
-    annotations.hpp
-    classfinder.hpp
-    reflectedclass.hpp
-    utils.hpp
-    utils.cpp
-)
+add_executable(MetaReflect ${SOURCES})
 
-target_link_libraries(metareflect
+if(MSVC)
+    set_property(TARGET MetaReflect PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreadedDLL")
+endif()
+
+target_link_libraries(MetaReflect
     PRIVATE
+    libclang
     clangTooling
     clangBasic
     clangASTMatchers
+    clangFormat
+    clangToolingInclusions
+    clangFrontend
+    clangDriver
+    LLVMWindowsDriver
+    clangParse
+    clangSerialization
+    clangSema
+    clangAPINotes
+    clangEdit
+    clangAnalysis
+    clangAST
+    clangSupport
+    LLVMFrontendHLSL
+    clangToolingCore
+    clangRewrite
+    clangLex
+    LLVMOption
+    LLVMFrontendOpenMP
+    LLVMScalarOpts
+    LLVMAggressiveInstCombine
+    LLVMInstCombine
+    LLVMFrontendOffloading
+    LLVMTransformUtils
+    LLVMAnalysis
+    LLVMProfileData
+    LLVMSymbolize
+    LLVMDebugInfoPDB
+    LLVMDebugInfoMSF
+    LLVMDebugInfoBTF
+    LLVMDebugInfoDWARF
+    LLVMObject
+    LLVMIRReader
+    LLVMBitReader
+    LLVMAsmParser
+    LLVMCore
+    LLVMRemarks
+    LLVMBitstreamReader
+    LLVMMCParser
+    LLVMMC
+    LLVMDebugInfoCodeView
+    LLVMTextAPI
+    LLVMBinaryFormat
+    LLVMTargetParser
+    LLVMSupport
+    LLVMDemangle
 )
+
+if(WIN32)
+    target_link_libraries(MetaReflect
+        PRIVATE
+        ws2_32
+        version
+    )
+endif()
 

@@ -6,8 +6,8 @@
 #define METAREFLECT_FIELD_GENERATOR_HPP
 #pragma once
 
-#include "utils.hpp"
-#include "annotations.hpp"
+#include "utils.h"
+#include "annotations.h"
 
 
 inline raw_ostream &

@@ -1,8 +1,8 @@
 #include <stdio.h>
 
-#include "annotations.hpp"
-#include "classfinder.hpp"
-#include "utils.hpp"
+#include "annotations.h"
+#include "classfinder.h"
+#include "utils.h"
 
 #include "clang/Tooling/CommonOptionsParser.h"
 #include "clang/Tooling/Tooling.h"
@@ -23,7 +23,7 @@ main(int argc, const char **argv)
 	CommonOptionsParser& optionsParser = *ExpectedParser;
 	ClangTool tool(optionsParser.getCompilations(), optionsParser.getSourcePathList());
 
-#if 0
+#if 1
     auto &db = optionsParser.getCompilations();
     for (auto &cmd : db.getAllCompileCommands()) {
         printf("CommandLine:");

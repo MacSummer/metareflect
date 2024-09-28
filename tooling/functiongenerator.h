@@ -6,8 +6,8 @@
 #define METAREFLECT_FUNCTION_GENERATOR_HPP
 #pragma once
 
-#include "utils.hpp"
-#include "annotations.hpp"
+#include "utils.h"
+#include "annotations.h"
 
 /* ========================================================================= */
 /* Function Generator                                                        */
