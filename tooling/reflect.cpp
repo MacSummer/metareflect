@@ -4,14 +4,24 @@
 #include "classfinder.hpp"
 #include "utils.hpp"
 
+#include "clang/Tooling/CommonOptionsParser.h"
+#include "clang/Tooling/Tooling.h"
+#include "llvm/Support/CommandLine.h"
+
+
 static llvm::cl::OptionCategory g_ToolCategory("metareflect options");
 
 int
 main(int argc, const char **argv)
 {
-    /* Parse command-line options. */
-    CommonOptionsParser optionsParser(argc, argv, g_ToolCategory);
-    ClangTool tool(optionsParser.getCompilations(), optionsParser.getSourcePathList());
+	auto ExpectedParser = CommonOptionsParser::create(argc, argv, g_ToolCategory);
+	if (!ExpectedParser) {
+		errs() << "Error parsing options: " << toString(ExpectedParser.takeError()) << "\n";
+		return 1;
+	}
+
+	CommonOptionsParser& optionsParser = *ExpectedParser;
+	ClangTool tool(optionsParser.getCompilations(), optionsParser.getSourcePathList());
 
 #if 0
     auto &db = optionsParser.getCompilations();

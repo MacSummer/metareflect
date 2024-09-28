@@ -50,7 +50,8 @@ struct FieldGenerator
         fieldName.clear();
         typeName.clear();
 
-        field->printName(fieldNameOs);
+		PrintingPolicy policy(ctx->getLangOpts());
+		field->printName(fieldNameOs, policy);
         GetRealTypeName(ctx, field->getType(), TypeNameOs);
 
         auto prefix = [&]() -> raw_ostream & {
