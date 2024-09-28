@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.15)
-project(MetaReflectTooling)
+
+set(ProjectName MetaReflectTooling)
+
+project(${ProjectName})
 
 set(LLVM_LIB_DIR "D:/Program Files/LLVM/lib")
 set(LLVM_INCLUDE_DIR "D:/Program Files/LLVM/include")
@@ -19,13 +22,13 @@ link_directories(
 
 file(GLOB_RECURSE SOURCES "./*.cpp" "./*.h")
 
-add_executable(MetaReflectTooling ${SOURCES})
+add_executable(${ProjectName} ${SOURCES})
 
 if(MSVC)
-    set_property(TARGET MetaReflectTooling PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreadedDLL")
+    set_property(TARGET ${ProjectName} PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreadedDLL")
 endif()
 
-target_link_libraries(MetaReflectTooling
+target_link_libraries(${ProjectName}
     PRIVATE
     libclang
     clangTooling
@@ -80,7 +83,7 @@ target_link_libraries(MetaReflectTooling
 )
 
 if(WIN32)
-    target_link_libraries(MetaReflectTooling
+    target_link_libraries(${ProjectName}
         PRIVATE
         ws2_32
         version
